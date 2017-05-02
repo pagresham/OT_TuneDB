@@ -71,10 +71,8 @@ if (isset($_POST['sort_all'])) {
 	else { 
 		//print $sortQuery; 
 	}
-
 	//print_r($sortArray);
 	// print_r($sortQuery);
-
 	// print_r($_POST);
 	// $query_sort = "";
 }

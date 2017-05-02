@@ -26,7 +26,7 @@ if(isset($_POST['login'])) {
 		if(!strlen(trim($username)) == 0) {
 			
 			
-			print "uname and post_uname:</br>".$username ." and ". $_POST['username']."</br>";
+			// print "uname and post_uname:</br>".$username ." and ". $_POST['username']."</br>";
 			
 			if(!preg_match("/^[a-zA-Z-.@_]{8,}$/", $username) || (strlen($username) > 45)) {
 				$errors['username'] = "Invalid username";
@@ -77,11 +77,11 @@ if(isset($_POST['login'])) {
 			$login_row = mysqli_fetch_assoc($login_result);
 			
 			if($login_row) {
-				print_r($login_row);
+				// print_r($login_row);
 				// login row is true
 				// found entered username
-				print 'found username';
-				print $login_row['PASSWORD'];
+				// print 'found username';
+				// print $login_row['PASSWORD'];
 				//print $password;
 				if(password_verify($password, $login_row['PASSWORD'])) {
 					// Passwords match
@@ -101,7 +101,7 @@ if(isset($_POST['login'])) {
 				else {
 					// Password doesnt match
 					$errors['login'] = "Invalid Password - doesnt match";
-					print $password;
+					// print $password;
 				}
 			}
 			else {
@@ -134,7 +134,7 @@ if (isLoggedIn()) {
 				<div class="form-group">
 	              <label class="control-label col-sm-2" for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
 					<div class="col-sm-10">
-	      				<input type="text" class="form-control" name="username" id="username" placeholder="Enter Username" value="<?PHP echo (isset($_POST['username']) ? trim($_POST['username']) : "") ?>" maxlength="45" required >
+	      				<input type="text" class="form-control" name="username" id="username" placeholder="Enter Username" value="<?PHP echo (isset($_POST['username']) ? trim($_POST['username']) : "") ?>" maxlength="45" required autofocus>
 	      				<small class="errorText"><?PHP echo array_key_exists('username', $errors) ? $errors['username'] : '' ?></small>	
 	      				<small class="errorText"><?PHP echo array_key_exists('login', $errors) ? $errors['login'] : '' ?></small>		
 	    			</div>					
@@ -181,18 +181,6 @@ if (isLoggedIn()) {
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?PHP
 include "footer.php";

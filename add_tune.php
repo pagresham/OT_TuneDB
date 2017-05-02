@@ -5,7 +5,7 @@ include "header.php";
 
 $errors = array();
 
-$memberId =$tunename =$tunekey =$parts =$skill =$tunesource =$newsource =$tune_added_message =$sourceDescription =$tuneEntered= "";
+$memberId =$tunename =$tunekey =$parts =$skill =$tunesource =$newsource =$tune_added_message =$sourceDescription =$tuneEntered= $found_id="";
 
 set_session_vars();
 $memberId = $_SESSION['member_id'];
@@ -27,12 +27,12 @@ if (isset($_POST['add_tune']) && isset($_SESSION['member_id'])) {
 	// process tune info form
 
 	if(!empty($_POST['tune-name'])) {
-		$tunename = trim($_POST['tune-name']);
+		$tunename = str_replace("'", "", $_POST['tune-name']);
 		if(strlen(trim($tunename)) == 0) {
 			$errors['tune-name'] = "Name cannot be blank";;
 		}
-		else if(!preg_match("/^[a-zA-Z0-9.' -]{1,45}$/", $tunename)) {
-			$errors['tune-name'] = "Sorry, tune names are 45 characters max, and contain letters and numbers.";
+		else if(!preg_match("/^[a-zA-Z0-9. -]{1,45}$/", $tunename)) {
+			$errors['tune-name'] = "Sorry, tune names are 45 characters max, and contain letters and numbers. No single quotes";
 		}
 	}
 	else { $errors['tune-name'] = "Please enter the tune's name"; 
@@ -67,25 +67,33 @@ if (isset($_POST['add_tune']) && isset($_SESSION['member_id'])) {
 	// process source selects
 	//IF $tunesource = "Other"{} tune-source
 	if(!empty($_POST['tune-source'])) {
+		// $tunesource = str_replace("'", "", $tunesource);
 		$tunesource = $_POST['tune-source'];
 		if(preg_match("/^[a-zA-Z0-9 ]{1,45}$/", $tunesource)) {
 			if($tunesource == "Other") {
 				if(!empty($_POST['new-source'])) {
+					// print $tunesource.":  line75<br>";
 					$tunesource = trim($_POST['new-source']);
+					// print $tunesource.":  line77<br>";
+					$tunesource = str_replace("'", "", $tunesource);
+					// print $tunesource.":  line79<br>";
 					if (strlen(trim($tunesource)) == 0) {
 						$errors['new-source'] = "Enter some dang text!";
 					}
-					else if(!preg_match("/^([a-zA-Z0-9 .'-]+)|(Other)$/", $tunesource)) {
-						$errors['new-source'] = "Enter a valid source";
+					else if(!preg_match("/^[a-zA-Z0-9 .-]+$/", $tunesource)) {
+						$errors['new-source'] = "Enter a valid source. regex 2 failed";
 					}
 				}
 				else {
+					// print "enter a valid source";
 					$errors['new-source'] = "Enter a valid source";	
 				}
 			}
 			// ts != other but passes regex
 		}
-		else { $errors['tune-source'] = "Enter a valid source selection"; }
+		else { 
+			print "first regex failed";
+			$errors['tune-source'] = "Enter a valid source selection"; }
 	}
 	else { $errors['tune-source'] = "Enter a valid source selection"; }
 
@@ -126,45 +134,102 @@ if (isset($_POST['add_tune']) && isset($_SESSION['member_id'])) {
 		$sourceType = addslashes($sourceType);
 		$sourceDescription = addslashes($sourceDescription);
 
-		$source_query = "INSERT INTO SOURCES (DESCRIPTION, SOURCE_TYPE, ADD_INFO) 
-							VALUES ('$tunesource', '$sourceType', '$sourceDescription')";
+		/**
+		 * Here, First, query to see if there is a source description matching the new one entered.
+		 * If yes, use the Source ID of that entry to populate the Source ID column of the next table.
+		 * If No, proceed as before. 
+		 */
+		
+		$init_src_query = "SELECT SOURCES_ID, DESCRIPTION FROM SOURCES
+							WHERE DESCRIPTION = '$tunesource'";
+		$init_src_results = mysqli_query($db, $init_src_query);
+		if(!$init_src_results) {
+			die("Connection Terminated: ".mysqli_error($db));
+		} else {
+			$numrows = mysqli_num_rows($init_src_results);
+			if ($numrows > 0) { // src description is already in the system
+				while($row = mysqli_fetch_assoc($init_src_results)){
+					$found_id = $row['SOURCES_ID'];	
+				}
+				// Here is where I populate next two tables, and be done
+				$last_source_id = $found_id; 
 
-		$source_query_result = mysqli_query($db, $source_query);
-		if(!$source_query_result) {
-			die("Connection terminated, source: ".mysqli_error($db));
-		}
-		else {
-			// Yes!!! This worked to get the last ID //
-			$last_source_id = mysqli_insert_id($db); 
+				$tunename = addslashes($tunename);
+				$versions_query = "INSERT INTO VERSIONS (SOURCES_ID, TUNE_NAME, TUNE_KEY, PARTS, MEMBER_ID)
+									VALUES ($last_source_id, '$tunename', '$tunekey', $parts, $memberId)";
 
-			$tunename = addslashes($tunename);
-			$versions_query = "INSERT INTO VERSIONS (SOURCES_ID, TUNE_NAME, TUNE_KEY, PARTS, MEMBER_ID)
-								VALUES ($last_source_id, '$tunename', '$tunekey', $parts, $memberId)";
+				$version_query_result = mysqli_query($db, $versions_query);
 
-			$version_query_result = mysqli_query($db, $versions_query);
-
-			if(!$versions_query) {
-				die("Connection terminated, version: ".mysqli_error($db));
-			}
-			else {
-				$last_version_id = mysqli_insert_id($db);
-				print $last_version_id.": is the last version id entered.";
-				$lists_query = "INSERT INTO LISTS (VERSION_ID, MEMBER_ID, SKILL_LVL) VALUES ($last_version_id, $memberId, '$skill')";
-				print $lists_query;
-				// $lists_query = "INSERT INTO LISTS (VERSION_ID, MEMBER_ID, SKILL_LVL) VALUES (100, 100, 'learning')";
-				$lists_query_result = mysqli_query($db, $lists_query);
-
-				if(!$lists_query_result) {
-					die("Connection terminated lists: ".mysqli_error($db)."<br>".$lists_query);
+				if(!$versions_query) {
+					die("Connection terminated, version: ".mysqli_error($db));
 				}
 				else {
-					print "you sent to the sources table: ".$last_source_id;
-					$tune_added_message = "<div class='successfully'><h5>Great! You've successfully added a tune.<h5><h4>".$tunename."<h4></div>";
-			
-					header("Location: unset.php");
+					$last_version_id = mysqli_insert_id($db);
+					print $last_version_id.": is the last version id entered.";
+					$lists_query = "INSERT INTO LISTS (VERSION_ID, MEMBER_ID, SKILL_LVL) VALUES ($last_version_id, $memberId, '$skill')";
+					print $lists_query;
+					// $lists_query = "INSERT INTO LISTS (VERSION_ID, MEMBER_ID, SKILL_LVL) VALUES (100, 100, 'learning')";
+					$lists_query_result = mysqli_query($db, $lists_query);
+
+					if(!$lists_query_result) {
+						die("Connection terminated lists: ".mysqli_error($db)."<br>".$lists_query);
+					}
+					else {
+						print "you sent to the sources table: ".$last_source_id;
+						$tune_added_message = "<div class='successfully'><h5>Great! You've successfully added a tune.<h5><h4>".$tunename."<h4></div>";
+				
+						header("Location: unset.php");
+					}
 				}
+
+				
 			}
-		}	
+			else { // new source is not yet in DB
+				// Here I populate the 3 tables
+				$source_query = "INSERT INTO SOURCES (DESCRIPTION, SOURCE_TYPE, ADD_INFO) 
+							VALUES ('$tunesource', '$sourceType', '$sourceDescription')";
+
+				$source_query_result = mysqli_query($db, $source_query);
+				if(!$source_query_result) {
+					die("Connection terminated, source: ".mysqli_error($db));
+				}
+				else {
+					// Yes!!! This worked to get the last ID //
+					$last_source_id = mysqli_insert_id($db); 
+
+					$tunename = addslashes($tunename);
+					$versions_query = "INSERT INTO VERSIONS (SOURCES_ID, TUNE_NAME, TUNE_KEY, PARTS, MEMBER_ID)
+										VALUES ($last_source_id, '$tunename', '$tunekey', $parts, $memberId)";
+
+					$version_query_result = mysqli_query($db, $versions_query);
+
+					if(!$versions_query) {
+						die("Connection terminated, version: ".mysqli_error($db));
+					}
+					else {
+						$last_version_id = mysqli_insert_id($db);
+						print $last_version_id.": is the last version id entered.";
+						$lists_query = "INSERT INTO LISTS (VERSION_ID, MEMBER_ID, SKILL_LVL) VALUES ($last_version_id, $memberId, '$skill')";
+						print $lists_query;
+						// $lists_query = "INSERT INTO LISTS (VERSION_ID, MEMBER_ID, SKILL_LVL) VALUES (100, 100, 'learning')";
+						$lists_query_result = mysqli_query($db, $lists_query);
+
+						if(!$lists_query_result) {
+							die("Connection terminated lists: ".mysqli_error($db)."<br>".$lists_query);
+						}
+						else {
+							print "you sent to the sources table: ".$last_source_id;
+							$tune_added_message = "<div class='successfully'><h5>Great! You've successfully added a tune.<h5><h4>".$tunename."<h4></div>";
+					
+							header("Location: unset.php");
+						}
+					}
+				}
+
+			}
+		}
+
+			
 	} // End db work / no errors
 }
 //print_r($_POST);
@@ -254,9 +319,6 @@ if (isset($_POST['add_tune']) && isset($_SESSION['member_id'])) {
 	      					<option value="Other" <?PHP print (isset($_POST['tune-source']) && $_POST['tune-source'] == "Other") ? "selected" : "" ?>>Other</option>
 	      					<?PHP
 
-  						// $query_source_sort = "SELECT DISTINCT s.description, s.sources_id from sources s
-  						// join versions v 
-  						// on s.sources_id = v.sources_id";
   						$query_source_sort = "SELECT DISTINCT description from sources";
   						$source_sort_result = mysqli_query($db, $query_source_sort);
   						if(!$source_sort_result) {
@@ -338,8 +400,6 @@ if (isset($_POST['add_tune']) && isset($_SESSION['member_id'])) {
 		</div> <!-- end col-12 -->
 	</div><!-- end row -->
 </div> <!-- end add_tune_container -->
-
-
 
 <?PHP
 include "footer.php";

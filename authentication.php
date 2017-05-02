@@ -63,7 +63,7 @@ function display_results($result, $db_hook) {
 	      mysqli_data_seek($result, 0);
 
 	      while($row = mysqli_fetch_assoc($result)) {
-	      	print "<tr>";
+	      	print "<tr class='tableRow'>";
 	      	foreach($row as $col => $value) {
 	      		print "<td>".$value."</td>";
 	      	}
@@ -115,13 +115,7 @@ function display_results($result, $db_hook) {
 	      			print "<td>".$value."</td>";	
 	      		}
 	      	}
-	      	//print $page;
-
-	      	// How to pass the version id out so I can delete it???
-
-	      	// Need to get the id and version number into the id somehow here. 
-	      	// 
-	      	// I could use type submit here, or use a <a> and href to a new page for processing;
+	      	
 	      	if(strpos($_SERVER['PHP_SELF'], '/myTunes.php')) {
 	      		print "<td><a href='details.php?versionId_=".$versionId."'>Details</a></td>";	
 	      	}

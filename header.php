@@ -20,22 +20,22 @@ if (isLoggedIn()) {
 // $memberId = $_SESSION['member_id'];
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>TuneDb</title>
   <!-- Add some SEO -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="Author" content="Pierce Gresham">
+  <meta name="Keywords" content="music fiddle tunes links style database friends style link video">
+  <meta name="Description" content="Track tunes in a database, Follow friends, remember tunes and more">
   
-
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
   <link rel="stylesheet" href="dls/bootstrap.css">
-  
-
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  
-
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJl1s_ElOQABn5g9toMSrBQoKtBPv6NFs"></script>
   <script src="dls/jquery-3.2.1.js"></script>
   <script
   src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"
@@ -44,9 +44,8 @@ if (isLoggedIn()) {
   
   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
   <script src="dls/bootstrap.js"></script>
-  
-
   <script type="text/javascript" src="js/app.js"></script>
+  
 </head>
 <body>
 <div id="container">
@@ -73,6 +72,8 @@ if (isLoggedIn()) {
           <li <?PHP print (strpos($_SERVER['PHP_SELF'], '/add_tune.php')) ? "class='active'" : ""; ?>><a href='add_tune.php'>Add Tune</a></li>
          
           <li <?PHP print (strpos($_SERVER['PHP_SELF'], '/myTunes.php')) ? "class='active'" : ""; ?>><a href='myTunes.php'>myTunes</a></li>
+
+          <li <?PHP print (strpos($_SERVER['PHP_SELF'], '/map.php')) ? "class='active'" : ""; ?>><a href='map.php'>User Map</a></li>
         <?PHP  
        }
        else {

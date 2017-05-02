@@ -20,22 +20,12 @@
 				<ul class="nav navbar-nav navbar-right">
 				 	<li <?PHP print (strpos($_SERVER['PHP_SELF'], '/mail_form.php')) ? "class='active'" : ""; ?> ><a href="mail_form.php" id="mail-btn"><span class="glyphicon glyphicon-user"></span> Get in Touch</a></li>
 				</ul>
-		     
-		        
-		      
+
 		    </div>
 		  </div>
 		</nav>
 
-		<!-- <nav class="navbar navbar-default nav-bottom">
-  			<ul class="nav navbar-nav">
-    			<li><a href="#" id="music-btn">Listen to Tunes</a></li>
-			 </ul>
-			 <ul class="nav navbar-nav navbar-right">
-			 	<li <?PHP //print (strpos($_SERVER['PHP_SELF'], '/mail_form.php')) ? "class='active'" : ""; ?> ><a href="mail_form.php" id="mail-btn"><span class="glyphicon glyphicon-user"></span> Get in Touch</a></li>
-			 </ul>
-  			<p class="navbar-text"></p>
-		</nav> -->
+	
 	</footer>
 </div>
 <!-- End footer div -->

@@ -8,7 +8,4 @@ logOut();
 header("Location: index.php");
 ?> 
 
-
-
-
 <!-- header('Location: http://www.example.com/'); -->

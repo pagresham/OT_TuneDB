@@ -28,17 +28,6 @@ if (isset($_POST['sort_all'])) {
     $sortArray[] = "L.MEMBER_ID =".$_POST['members']." ";
   }
 
-// SELECT TUNE_NAME, TUNE_KEY, PARTS, S.DESCRIPTION AS 'SOURCE'
-
-// FROM LISTS L
-// JOIN VERSIONS V ON V.VERSION_ID = L.VERSION_ID
-// JOIN SOURCES S
-// ON V.SOURCES_ID = S.SOURCES_ID
-// WHERE L.MEMBER_ID = 10
-// order by TUNE_NAME;
-
-
-
 
 	$sortQuery = "SELECT V.TUNE_NAME AS 'Name', V.TUNE_KEY AS 'Key', V.PARTS AS 'Parts', S.DESCRIPTION AS 'Source'
 								
@@ -77,7 +66,6 @@ set_session_vars();
 ?>
 <!-- #body started -->
 
-
 <div class="explorer_results container">
 	<div>
 		<h3 class="legend-like">Explore the DB</h3>
@@ -95,9 +83,7 @@ set_session_vars();
     		<form method="post" action="explore_more.php" id="explore">
    			<div class="collapse navbar-collapse" id="sortNavbar">
       			
-      			<ul class="nav navbar-nav form-horizontal">
-      				
-					
+      		<ul class="nav navbar-nav form-horizontal">
 					<li>		
 						<label for="title">Title</label>
     					<select class="form-control" name="title" id="title">
@@ -176,9 +162,7 @@ set_session_vars();
               $query_source_sort = "SELECT distinct description 
                                     from sources
                                     ORDER BY description";
-  						// $query_source_sort = "SELECT DISTINCT s.description, s.sources_id from sources s
-  						// join versions v 
-  						// on s.sources_id = v.sources_id";
+  					
   						$source_sort_result = mysqli_query($db, $query_source_sort);
   						if(!$source_sort_result) {
   							 die("DB connection terminated: ".mysqli_error());
@@ -227,10 +211,7 @@ set_session_vars();
               <option value="">None</option>
 							<option value="v.parts">Parts</option>
 							<option value="s.description">Source</option>
-               <option value="v.tune_name">Title</option>
-							<?PHP
-
-							?>
+              <option value="v.tune_name">Title</option>
 						</select>
 					</li>
 	      		</ul>

@@ -21,9 +21,6 @@ include "header.php";
 	</div>
 </div>	
 
-
-
-
 <?PHP
 // header("Location: add_tune.php");
 include "footer.php";

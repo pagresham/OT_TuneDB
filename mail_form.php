@@ -7,8 +7,6 @@ $errors = array();
 
 set_session_vars();
 
-
-
 /**
  * In a nutshell 
  *
@@ -23,10 +21,6 @@ set_session_vars();
  * 9. IF no, print error
  * 10. If $_POST not set, display form
  */
-
-
-
-
 
 /**
  * Function to first sanitize an email string of bad chars
@@ -49,22 +43,8 @@ function spamcheck($field) {
 // Folder Session writes to @ /var/folders/8t/h4cnl6r531159dnkvcf5yy1w0000gq/T
 
 print "<div>";
-// if (isset ($_SESSION['6_letters_code'])) {
-// 	print "6letter code is set";
-// }
-// else {
-// 	print "letter code is not set";
-// }
-
 
 // Remember the deal with POST, it is not erased on referesh, or even brower refres, you have to visit a DIFFERENT PAGE //
-
-
-
-
-// QQQ Why oh why is post always set??? //
-
-
 
 if (isset ($_POST['send_mail']))    
 {       
@@ -75,7 +55,7 @@ if (isset ($_POST['send_mail']))
 	}
 	else {
 		// Begin processing email
-		$to="piercegresham@yahoo.com";                       
+		$to="piercegresham@gmail.com";                       
 
 		if(!empty($_POST['subject'])){
 			$subject= $_POST['subject']; 
@@ -92,7 +72,7 @@ if (isset ($_POST['send_mail']))
 		
 
 		// QQQ Had to do this to get sessions not to complain, but its really because 
-		// post is persisting between browser loads, and broser refreshes
+		// post is persisting between browser loads, and browser refreshes
 		if (isset($_SESSION['6_letters_code']) && $_SESSION['6_letters_code'] == $_POST['captcha']) {  
 			// print "Captcha Correct";
 			// call mail using the variables above.  

@@ -34,6 +34,7 @@ body {
 	background-image: url(../img/sunset_faded2.jpg);
 	background-attachment: fixed;
 	background-repeat: repeat-y;
+	background-position: center 0%;
 }
 .navbar {
 	background-color: rgba(255, 255, 255, 1);
@@ -76,13 +77,13 @@ body {
 }
 .icon-bar {}
 
-#content {
-	
-}
+#content {}
+
 .welcome {
 	/*width: 80%;*/
 	text-align: center;
 	margin-bottom: 3em;
+	margin-top: 1.5em;
 }
 .welcome-info {
 	width: 70%;
@@ -114,6 +115,7 @@ body {
 	margin-top: 3em;
 }
 .center {text-align: center; }
+
 #add_tune_form,
 #create_account_form {
 	max-width: 800px;
@@ -121,9 +123,7 @@ body {
 	/*text-align: center;*/
 }
 
-.create_account_container  {
-	
-}
+.create_account_container  {}
 .form-control {
 	background-color: rgba(200,200,200, .3);
 }
@@ -151,10 +151,8 @@ li {
 	/*display: inline-block;*/
 	margin-right: 0;
 }
-
 .source-text {
 	 width: 100%;
-
 }
 .successfully {
 	display: inline-block;
@@ -211,30 +209,43 @@ div.container-fluid {
 #sendMail, #another_captcha {
 	margin: .5em;
 }
-// $('').add('').hide();
+
+$fire_color: #9E170E;
+
+
 #hid-msg2 {
-	color: red;
+	color: $fire_color;
 }
 #hid-msg1 {
 	color: green;
 }
 .tune-links:hover {
  	cursor:pointer;
- 	color: blue;
+ 	color: $fire_color;
+ 	text-decoration: none;
+}
+.tune-links2:hover {
+	cursor:pointer;
+ 	color: $fire_color;
+ 	
+}
+.fire {
+	color: $fire_color;
+}
+.tune-links {
+	text-decoration: none;
 }
 .lnk-btn {
 	margin-bottom: 1em;
 } 
 .drop-down {
 	min-height: 100%;
-	max-height: 330px;
+	max-height: 370px;
 	// height: 280px;
 	border: 1px solid #e5e5e5;
 	border-radius: .5em;
 	overflow: scroll;
 	padding: 0 .5em;
-	
-	// background-color: red;
 }
 ul {
 	padding: 0;
@@ -246,12 +257,11 @@ ul {
 	// padding: .5em;
 	li {
 
-		text-decoration: underline;
+		text-decoration: none;
 		// list-style: none;
 		margin: .5em;
 
 	}
-// 	background-color: red;
 }
 .vlink-section {
 	margin-top: 1em;
@@ -259,7 +269,98 @@ ul {
 #vid-dsp, #vid-sel {
 	margin-bottom: 1em;
 }
+.ui-autocomplete {
+	background-color: #ccc;
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+	color: #333;
+	max-width: 8em;
+	padding: .25em 0 0 .5em;
+	max-height: 15em;
+	overflow: scroll;
+	background-color: rgba(200,200,200, .5);
+}
 
+// =============  Start Map Page Style ==============  //
+
+
+// member Map Styles //
+.member-info {
+	// border: 1px solid green;
+	// height: 35em;
+	margin: 1em 0;
+}
+.map-wrapper {
+	padding: 1em;
+	// border: 1px solid green;
+	height: 35em;
+}
+#umap {
+	height: 100%;
+	border: 2px solid #333;
+	border-radius: 10px;
+}
+#regional-output,
+#member-output {
+	// border: 1px solid red;
+	height: 35em;
+	overflow: scroll;
+	// display: none;
+	td {
+		padding: .5em 0 ;
+	}
+}
+
+// Regional map styles //
+.regional-info {
+	// border: 1px solid green;
+	// height: 35em;
+}
+#regional-map {
+	height: 100%;
+	border: 2px solid #333;
+	border-radius: 10px;
+}
+#source,
+#members,
+#title {
+	width: 8em;
+}
+.style-controls {
+	width: 40%;
+	position: absolute;
+	bottom: 2em;
+	left: 30%;
+	button {
+		background-color: white;
+		border-radius: 5px;
+		border: none;
+		margin: .25em;
+	}
+}
+#regional-output {
+	position: relative;
+	overflow: scroll;
+}
+.style-card {
+	background-color: rgba(196, 195, 143, 0.62);
+	border-radius: .5em;
+	display: none;
+	height: 28em;
+	overflow: scroll;
+	padding: .5em;
+	word-break: normal;
+  	// white-space: normal;
+}
+#style-output {
+
+}
+tr:hover {
+	background-color: rgba(200, 200, 200, .5);
+}
+.explorer_results {
+	margin-top: 2em;
+}
 // .another {
 // 	margin: 6em;
 // }

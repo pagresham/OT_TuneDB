@@ -30,7 +30,7 @@ if(isset($_POST['add_link'])) {
 			$link = $_POST['link_name'];
 			if (!preg_match("/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/",$link)) {
 				if(strpos($link, 'www.youtube.com')) {
-					print $link;
+					// print $link;
 					$insert_link_query = "";
 					if(!empty($_POST['link_desc']) && strlen(trim($_POST['link_desc'])) !== 0) {
 						$linkDesc = $_POST['link_desc'];
@@ -49,7 +49,7 @@ if(isset($_POST['add_link'])) {
 	if(count($errors) == 0) {
 		unset($_POST['link_desc']);
 		unset($_POST['link_name']);
-		print "no errors";
+		// print "no errors";
 		
 		$link = addslashes($link);
 		$linkDesc = addslashes($linkDesc);
@@ -65,17 +65,12 @@ if(isset($_POST['add_link'])) {
 	}
 }
 
-
-
-
 // Go through Get array, and get the passed value out //
 foreach ($_GET as $key => $value) {
 	if ($key == 'versionId_') {
 		$versionId = $_GET['versionId_'];
 	}
 }
-////print $versionId."  is the v id";
-
 
 // build query to get the one tune selected.
 $detailQuery = "SELECT DISTINCT V.TUNE_NAME AS 'Name', V.TUNE_KEY AS 'Key', V.PARTS AS 'Parts', S.description AS 'Source', L.SKILL_LVL AS 'Skill'
@@ -168,8 +163,6 @@ else {
 					</div>
 					<button type="submit" name="delete_tune" value="<?PHP echo $versionId ?>" class="form-control btn btn-danger" id="delete">Delete Tune!</button>	
 				</div>
-			
-
 
 			</form>
 		</div>

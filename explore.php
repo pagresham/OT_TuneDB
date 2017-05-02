@@ -48,11 +48,6 @@ if (isset($_POST['sort_all'])) {
 		die("Connection terminated:  ".mysqli_connect_error());
 	}
 
-	//print_r($sortArray);
-	// print_r($sortQuery);
-
-	// print_r($_POST);
-	// $query_sort = "";
 }
 
 set_session_vars();
@@ -94,8 +89,7 @@ set_session_vars();
     							}
     							else if (mysqli_num_rows($name_sort_result) > 0) {
     								while ($row = mysqli_fetch_assoc($name_sort_result)) {
-    									// $replaced = str_replace(" ", "\ ",$row['TUNE_NAME']);
-
+    						
     									print "<option value='".$row['TUNE_NAME']."'>".$row['TUNE_NAME']."</option>";
     									// print $row['TUNE_NAME'];
     								}
@@ -152,11 +146,7 @@ set_session_vars();
   					<select class="form-control" name="source" id="source">
   						<option value="">All Sources</option>
   						<?PHP
-
-  						// $query_source_sort = "SELECT s.description, s.sources_id from sources s
-  						// join versions v 
-  						// on s.sources_id = v.sources_id";
-  						
+              
   						$query_source_sort = "SELECT distinct description from sources";
 
   						$source_sort_result = mysqli_query($db, $query_source_sort);

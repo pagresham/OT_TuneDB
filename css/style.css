@@ -26,7 +26,8 @@ body {
 #container {
   background-image: url(../img/sunset_faded2.jpg);
   background-attachment: fixed;
-  background-repeat: repeat-y; }
+  background-repeat: repeat-y;
+  background-position: center 0%; }
 
 .navbar {
   background-color: white;
@@ -70,7 +71,8 @@ body {
 .welcome {
   /*width: 80%;*/
   text-align: center;
-  margin-bottom: 3em; }
+  margin-bottom: 3em;
+  margin-top: 1.5em; }
 
 .welcome-info {
   width: 70%;
@@ -191,21 +193,32 @@ video {
   margin: .5em; }
 
 #hid-msg2 {
-  color: red; }
+  color: #9E170E; }
 
 #hid-msg1 {
   color: green; }
 
 .tune-links:hover {
   cursor: pointer;
-  color: blue; }
+  color: #9E170E;
+  text-decoration: none; }
+
+.tune-links2:hover {
+  cursor: pointer;
+  color: #9E170E; }
+
+.fire {
+  color: #9E170E; }
+
+.tune-links {
+  text-decoration: none; }
 
 .lnk-btn {
   margin-bottom: 1em; }
 
 .drop-down {
   min-height: 100%;
-  max-height: 330px;
+  max-height: 370px;
   border: 1px solid #e5e5e5;
   border-radius: .5em;
   overflow: scroll;
@@ -216,7 +229,7 @@ ul {
   list-style-type: none; }
 
 #link-list-drp li {
-  text-decoration: underline;
+  text-decoration: none;
   margin: .5em; }
 
 .vlink-section {
@@ -224,5 +237,76 @@ ul {
 
 #vid-dsp, #vid-sel {
   margin-bottom: 1em; }
+
+.ui-autocomplete {
+  background-color: #ccc;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  color: #333;
+  max-width: 8em;
+  padding: .25em 0 0 .5em;
+  max-height: 15em;
+  overflow: scroll;
+  background-color: rgba(200, 200, 200, 0.5); }
+
+.member-info {
+  margin: 1em 0; }
+
+.map-wrapper {
+  padding: 1em;
+  height: 35em; }
+
+#umap {
+  height: 100%;
+  border: 2px solid #333;
+  border-radius: 10px; }
+
+#regional-output,
+#member-output {
+  height: 35em;
+  overflow: scroll; }
+  #regional-output td,
+  #member-output td {
+    padding: 0.5em 0; }
+
+#regional-map {
+  height: 100%;
+  border: 2px solid #333;
+  border-radius: 10px; }
+
+#source,
+#members,
+#title {
+  width: 8em; }
+
+.style-controls {
+  width: 40%;
+  position: absolute;
+  bottom: 2em;
+  left: 30%; }
+  .style-controls button {
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    margin: .25em; }
+
+#regional-output {
+  position: relative;
+  overflow: scroll; }
+
+.style-card {
+  background-color: rgba(196, 195, 143, 0.62);
+  border-radius: .5em;
+  display: none;
+  height: 28em;
+  overflow: scroll;
+  padding: .5em;
+  word-break: normal; }
+
+tr:hover {
+  background-color: rgba(200, 200, 200, 0.5); }
+
+.explorer_results {
+  margin-top: 2em; }
 
 /*# sourceMappingURL=style.css.map */

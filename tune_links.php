@@ -15,10 +15,6 @@ $u =$d =$v ="";
 // Giving me all the data in a local array to use as I want.
 // Looks like: array(array('URL' => $u, 'Description' => $d, 'VersionId' => $v), array(), array()...)
 
-
-
-
-
 // Build query to get all video links //
 $image_query = "SELECT URL, DESCRIPTION, ifnull(VERSION_ID, '') AS VERSION_ID
                 FROM LINKS";
@@ -42,9 +38,6 @@ elseif (mysqli_num_rows($image_query_result) > 0) {
       if ($key == 'VERSION_ID') { $versionId = $value; $v =$value; } 
         else { $versionId = 'Link Title'; $v ="None"; }
     }
-    
-    // print "<p>".$desc."</p>";
-    
     
     
     if(strpos($url, 'watch?v=') != false) {
@@ -77,19 +70,26 @@ elseif (mysqli_num_rows($image_query_result) > 0) {
         <div class="row">
           <div class="col-sm-6" id="vid-sel">
             
-            <div class="center lnk-btn">
-              <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#link-list-drp">Display Links</button>  
-            </div>
+            <!-- <div class="center lnk-btn">
+              <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#link-list-drp">Display Links</button>  
+            </div> -->
 
             <div class='drop-down'>
             
-              <div id="link-list-drp" class="collapse">
+              <div id="link-list-drp" >
                 <ul>
                   <?PHP
+                  
                   for($i=0;$i<count($urlArray);$i++){
-                     print "<li  href='#' class='tune-links' id='".$urlArray[$i]['URL']."'>".$urlArray[$i]['Description']."</li>";
-                  }
-                ?>  
+                      if($i % 2 ==0){
+                        $class = "tune-links";
+                      }
+                      else {$class = "tune-links2";}
+
+                     print "<li href='#' class='$class' id='".$urlArray[$i]['URL']."'>
+                     <span class='glyphicon glyphicon-facetime-video fire'></span> ".$urlArray[$i]['Description']."</li>";
+                    }
+                  ?>  
                 </ul>                             
               </div>
            </div>
@@ -97,9 +97,6 @@ elseif (mysqli_num_rows($image_query_result) > 0) {
           <div class="col-sm-6" id="vid-dsp">
             <iframe id="vid-frame" allowfullscreen></iframe>
           </div>
-          <!-- <div>
-            <p id="vid-desc"></p>
-          </div> -->
         </div>
       </div>
       <!-- additional row here -->
@@ -107,13 +104,8 @@ elseif (mysqli_num_rows($image_query_result) > 0) {
     </div>
   </section>
   <section></section>
-	<?PHP
 
-  ?>
 </div>
-<!-- <iframe width="420" height="315"
-src="https://www.youtube.com/embed/XGSy3_Czz8k?controls=1">
-</iframe> -->
 
 <!-- #body ends next line -->
 <?PHP

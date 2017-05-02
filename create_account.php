@@ -6,10 +6,14 @@
 // Ceasar187!
 // piercegresham
 // 1Banjoh0!
+// drewmurdza DrewMurdza1!
+// sampankratz SamPankratz1!
+// jimmymartin JimmyMartin1!
+// luvdafiddle LuvdaFiddle1!
 include "header.php";
 
 // Already have username from header.php
-$fname =$lname =$email =$password1 =$slashed_password1 =$hashed_password1 =$password2 =$zipcode =$errorCount = "";
+$fname =$lname =$email =$password1 =$slashed_password1 =$hashed_password1 =$password2 =$zipcode =$errorCount =$state =$town ="";
 $errors = array();
 
 // Clear post array if reset is pressed
@@ -42,7 +46,7 @@ if (isset($_POST['register'])) {
 		if(strlen(trim($fname)) === 0 || (strlen($fname) > 45)) {
 			$errors['fname'] = "Please enter your first name";
 		}
-		else if (!preg_match("/^[a-zA-Z0-9]/", $fname)) {
+		else if (!preg_match("/^[a-zA-Z0-9]{1,45}$/", $fname)) {
 			$errors['fname'] = "Names can only include standard letters and number.";
 		}
 	}
@@ -56,15 +60,48 @@ if (isset($_POST['register'])) {
 			$errors['lname'] = "No empty strings please";
 		}
 		else if (strlen($lname) > 45) {
-			$errors['lname'] = "Password is too long";
+			$errors['lname'] = "Last Name is too long";
 		}
-		else if (!preg_match("/^[a-zA-Z0-9]/", $lname)) {
+		else if (!preg_match("/^[a-zA-Z0-9]{1,45}$/", $lname)) {
 			$errors['lname'] = "Names can only include standard letters and number.";
 		}
 	}
 	else {
 		$errors['lname'] = "Please enter your last name";
 	}
+
+
+	// Validate Town name //
+	if (!empty($_POST['town'])) {
+		$town = trim($_POST['town']);
+		if (strlen(trim($town)) === 0) {
+			$errors['town'] = "No empty strings please";
+		}
+		else if (strlen($town) > 45) {
+			$errors['town'] = "Password is too long";
+		}
+		else if (!preg_match("/^[a-zA-Z0-9 '-]{1,45}$/", $town)) {
+			$errors['town'] = "Town names can only include letters and \" ' - .  \"";
+		}
+	}
+	else {
+		$errors['town'] = "Please enter your hometown.";
+	}
+
+	// Validate State name //
+	if (!empty($_POST['state'])) {
+		$state = trim($_POST['state']);
+		if (strlen(trim($state)) === 0) {
+			$errors['state'] = "Please select your home state.";
+		}
+		else if (!preg_match("/^[a-zA-Z '-]{1,45}$/", $state)) {
+			$errors['state'] = "Please enter a valid state name.";
+		}
+	}
+	else {
+		$errors['state'] = "Please enter your home state.";
+	}
+
 	// VAlidate zipcode 
 	if(!empty($_POST['zipcode'])) {
 		$zipcode = $_POST['zipcode'];
@@ -95,8 +132,7 @@ if (isset($_POST['register'])) {
     		$errors['email'] = "Please enter a valid Email address";
   		}
 
-  		 
-
+  		
   	// Validate 1st PW
   	if (!empty($_POST['password1'])) {
     	$password1 = $_POST['password1'];
@@ -124,9 +160,13 @@ if (isset($_POST['register'])) {
   	// Check errors
   	$errorCount = count($errors);
   		if ($errorCount > 0) {
-   	 	//print "<small class='errorText'>There are errors. Please make corrections and try again</small>";
+   	 	print "<small class='errorText'>There are errors. Please make corrections and try again</small>";
     		$validImputs = false;
  		}
+
+ 		// So here is the spot where I need to do some work.
+ 		// I need to accomodate the new information gathered.
+ 		// town and state will be stored in the MEMBERS table
  		else {
  			// No Errors //  
  			// Start with checking if user name exists already //
@@ -146,13 +186,19 @@ if (isset($_POST['register'])) {
         		$errors['username'] = "Username already taken.";
       			}
       			else {
-      				
+      				$username = addslashes($username);
+      				$fname = addslashes($fname);
+      				$lname = addslashes($lname);
+      				$email = addslashes($email);
+      				$zipcode = addslashes($zipcode);
+      				$town = addslashes($town);
+      				$state = addslashes($state);
     				$hashedPassword1 = password_hash($password1, 1);
     				//print $hashedPassword1;
         			// passwords matched, input passed validation, and username is free
         			$query = "INSERT INTO MEMBERS
-                    	(USERNAME, F_NAME, L_NAME, EMAIL, PASSWORD, ZIP_CODE)
-                    	VALUES ('$username', '$fname', '$lname', '$email', '$hashedPassword1', '$zipcode')";
+                    	(USERNAME, F_NAME, L_NAME, EMAIL, PASSWORD, ZIP_CODE, TOWN, STATE)
+                    	VALUES ('$username', '$fname', '$lname', '$email', '$hashedPassword1', '$zipcode', '$town', '$state')";
 
         			$result = mysqli_query($db, $query);
 
@@ -160,15 +206,8 @@ if (isset($_POST['register'])) {
           				echo "INSERT error:" . mysqli_error($db);
           				die("Connection Terminated:  ". mysql_error());
         			}
-        			else {
-          			// User gets link to go to login page.
-          				$loginMessage = "<p class='successText'><a href='login.php'><button type='button' class='btn btn-success'>Login</button></a>
-             				Thank you for registering!</p>";
-
-          				// echo "<p>Thank you for registering. Please <a href=\"login.php?username=$username\">login.</a></p>";  
-            			unset($_POST);
+        			else {  
             			header("Location: index.php");
-
        		 		}
      			}
    			}
@@ -177,15 +216,14 @@ if (isset($_POST['register'])) {
 
 ?>
 
-
-
 <div class="container-fluid create_account_container">
 	<div class="row">
 		<div class="col-sm-12">
 			<form  id="create_account_form" class="form-horizontal" role="form" method="post" action="create_account.php" style="padding: 3em;">
 			<fieldset>
 				<legend><h3>Create a New Member</h3></legend>
-
+				<p>Please provide this basic information so we can provide a more featureful experience.</p>
+				
 				<div class="form-group">
 	              <label class="control-label col-sm-2" for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
 					<div class="col-sm-10">
@@ -208,6 +246,25 @@ if (isset($_POST['register'])) {
 					<div class="col-sm-10">
 	      				<input type="text" class="form-control" name="lname" id="lname" value="<?PHP echo (isset($_POST['lname']) ? $_POST['lname'] : "") ?>" maxlength="45" required >
 	      				<small class="errorText"><?PHP echo array_key_exists('lname', $errors) ? $errors['lname'] : '' ?></small>		
+	    			</div>					
+            	</div>
+
+
+				<!--  Make this TOWN -->
+				<div class="form-group">
+	              <label class="control-label col-sm-2" for="citySelect"><span class="glyphicon glyphicon-globe"></span> Home Town</label>
+					<div class="col-sm-10">
+	      				<input type="text" class="form-control" name="town" id="citySelect"  value="<?PHP echo (isset($_POST['town']) ? $_POST['town'] : "") ?>" maxlength="45">
+	      				<small class="errorText"><?PHP echo array_key_exists('town', $errors) ? $errors['town'] : '' ?></small>		
+	    			</div>					
+            	</div>
+
+				<!--  Make this STATE -->
+            	<div class="form-group">
+	              <label class="control-label col-sm-2" for="stateSelect"><span class="glyphicon glyphicon-globe"></span> State</label>
+					<div class="col-sm-10">
+	      				<input type="text" class="form-control" name="state" id="stateSelect"  value="<?PHP echo (isset($_POST['state']) ? $_POST['state'] : "") ?>" maxlength="45">
+	      				<small class="errorText"><?PHP echo array_key_exists('state', $errors) ? $errors['state'] : '' ?></small>		
 	    			</div>					
             	</div>
 
@@ -243,13 +300,6 @@ if (isset($_POST['register'])) {
 	    			</div> 
 	            </div>
 	            	
-				<!-- <div class="form-group">
-					<label class="control-label col-sm-2"></label>
-					<div class="checkbox col-sm-10">
-	              		<label><input type="checkbox" value="" checked>Remember me</label>
-	            	</div>
-				</div> -->
-
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="create_account"></label>
 					<div class="col-sm-10">
@@ -267,7 +317,6 @@ if (isset($_POST['register'])) {
 		</div>
 	</div>
 </div>
-
 
 <?PHP
 include "footer.php";

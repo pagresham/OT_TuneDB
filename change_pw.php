@@ -1,5 +1,7 @@
 
 <?PHP
+// Utility file to help me change my password if needed.
+// this functionality could be built in for all users
 include "header.php";
 
 $newPw = 'PierceGresham1!';
@@ -18,8 +20,6 @@ else {
 	header("Location: index.php");	
 }
 ?>
-
-
 
 <?PHP
 include "footer.php";

@@ -1,0 +1,63 @@
+Add a map users option that will Map a marker for all the users, and give a name at least
+
+Add a map that will mark regional information, Perhaps by state, or by region
+Write a xml or ajax file to hold info, and use $.load() to grab the goods.
+
+#Google Search : georgia fiddle style description
+https://books.google.com/books?id=ZZCuljaMXPcC&pg=PA106&lpg=PA106&dq=georgia+fiddle+style+description&source=bl&ots=l2rA1K9HaH&sig=0GwBVRupDGGuf62dTOCjIdFdMJg&hl=en&sa=X&ved=0ahUKEwiIncCpjcjTAhUW1WMKHRhsCpcQ6AEITjAG#v=onepage&q=georgia%20fiddle%20style%20description&f=false
+
+# Missouri Old-Time Fiddling Traditions
+http://www.missourifiddling.com/MO_FID_TRADITIONS.htm
+http://www.missourifiddling.com/index.html
+
+#Kentucky fiddle tune search by county
+http://community.berea.edu/hutchinslibrary/specialcollections/kentuckymapsearch.asp
+
+#Ga fiddle Tunes
+https://www.slippery-hill.com/collection/159-original-georgia-fiddle-tunes
+
+#Traditional Tune archive
+http://www.tunearch.org/wiki/TTA
+
+#the Session 
+https://thesession.org/tunes#top
+
+#Old Time fiddle Tunes
+http://www.mne.psu.edu/lamancusa/tunes.html
+
+#Traditional OT music of Americs .UK
+http://www.traditionalmusic.co.uk/old-time-music/idxv11s.htm
+
+#Old Town School of Folk Music
+https://www.oldtownschool.org/classes/adults/fiddle/tunes/
+
+#WV KY fiddle Tunes
+http://www.abbamoses.com/fiddledo/fiddlepage
+
+#Smithsonian institute
+http://www.folkways.si.edu/folkways-recordings/smithsonian
+
+#Fiddle Tunes of the Old Frontier: The Henry Reed Collection
+https://www.loc.gov/collections/henry-reed-fiddle-tunes/about-this-collection/
+
+#Field recorders Collective
+http://fieldrecorder.org/
+
+#County Sales
+https://www.countysales.com/
+
+#OT Festival List
+http://www.oldtimebanjo.com/festivals.html
+
+#CROMA
+http://www.thecroma.org/
+
+#Bruce Molsky
+https://www.brucemolsky.com/
+
+#Texas Fiddlers YouTube page.
+https://www.youtube.com/user/texasoldtimefiddlers/videos
+
+#Down East fiddling
+https://archive.org/details/DowneastFiddleFavourites/BigJohnMcneil.mp3
+

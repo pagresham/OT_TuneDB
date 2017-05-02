@@ -22,9 +22,6 @@ if(isset($_POST['delete_tune'])) {
 			die("Connection Terminated: on delete: ".mysqli_error($db));
 		}
 	}
-
-	
-
 	?>
 	
 	<div class="row">
@@ -38,10 +35,6 @@ if(isset($_POST['delete_tune'])) {
 	header("Location: myTunes.php");
 
 }
-
-
-
-
 
 include "footer.php";
 ?>
