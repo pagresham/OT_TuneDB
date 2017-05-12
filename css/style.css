@@ -20,6 +20,12 @@ html, body {
   height: 3.5em;
   background: #fff; }
 
+::-webkit-scrollbar {
+  width: 6px; }
+
+::-webkit-scrollbar-thumb {
+  background-color: #235867; }
+
 body {
   /*background-color: lightblue;*/ }
 
@@ -249,6 +255,9 @@ ul {
   overflow: scroll;
   background-color: rgba(200, 200, 200, 0.5); }
 
+.ui-helper-hidden-accessible {
+  display: none; }
+
 .member-info {
   margin: 1em 0; }
 
@@ -261,12 +270,15 @@ ul {
   border: 2px solid #333;
   border-radius: 10px; }
 
-#regional-output,
 #member-output {
   height: 35em;
   overflow: scroll; }
-  #regional-output td,
   #member-output td {
+    padding: 0.5em 0; }
+
+#regional-output {
+  height: 35em; }
+  #regional-output td {
     padding: 0.5em 0; }
 
 #regional-map {
@@ -291,15 +303,13 @@ ul {
     margin: .25em; }
 
 #regional-output {
-  position: relative;
-  overflow: scroll; }
+  position: relative; }
 
 .style-card {
   background-color: rgba(196, 195, 143, 0.62);
   border-radius: .5em;
   display: none;
   height: 28em;
-  overflow: scroll;
   padding: .5em;
   word-break: normal; }
 
@@ -308,5 +318,22 @@ tr:hover {
 
 .explorer_results {
   margin-top: 2em; }
+
+#loc_label {
+  font-weight: bold;
+  color: darkgreen;
+  background-color: rgba(100, 100, 100, 0.3);
+  border-radius: 5px; }
+  #loc_label a, #loc_label span {
+    color: #333; }
+
+#hidden_lat,
+#hidden_lng {
+  width: 100%;
+  background-color: rgba(200, 200, 200, 0.2); }
+
+.memberLat,
+.memberLng {
+  display: none; }
 
 /*# sourceMappingURL=style.css.map */

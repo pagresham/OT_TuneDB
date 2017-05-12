@@ -24,13 +24,7 @@ set_session_vars();
  * 10. If $_POST not set, display form
  */
 
-
-
-
-
 // QQQ Why oh why is post always set??? //
-
-
 
 ?>
 

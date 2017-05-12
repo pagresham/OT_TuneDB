@@ -17,7 +17,7 @@
       },
       {
         "name": "Western Carolina Fiddle Style",
-        "description": "Steeped in an Appalachian tradition that has remained tucked away in the Blue Ridge Mountains since the first irish immagrants ventured there, Wester Carolina fiddle music is rich in story and lore.",
+        "description": "Steeped in an Appalachian tradition that has remained tucked away in the Blue Ridge Mountains since the first irish immagrants ventured there, Western Carolina fiddle music is rich in story and lore.",
         "artists": "The Stewart Brothers, Doc Watson, and Clarence Ashley will all get you in the mood for some Good ol Mountain Due.",
         "lat": "36.230912",
         "lng": "-81.515033"

@@ -3,6 +3,56 @@ $(function(){
 	
 	 var urlArray = [];
 
+	// Set up listener for create user Form
+	
+	$('#loc_btn').on('click', function(e){
+		
+		console.log('pressed submit');
+		e.preventDefault();
+		var town = $('#citySelect').val();
+		var state = $('#stateSelect').val();
+		var lat = "";
+		var lng = "";
+		if (town !== "" && state !== ""){
+			var geocoder = new google.maps.Geocoder();
+			geocoder.geocode({address: town+", "+state}, function(result, status){
+				if(status == 'OK') {
+					lat = result[0].geometry.location.lat();
+					lng = result[0].geometry.location.lng();
+					$('#hidden_lat').val(lat);
+					$('#hidden_lng').val(lng);
+					console.log($('#hidden_lat').val());
+					console.log($('#hidden_lng').val());
+				}
+			});
+		}
+		
+	});
+
+	// Activate Bootstrap Tooltips
+
+	$('[data-toggle="tooltip"]').tooltip(); 
+
+
+
+
+	// geocoder.geocode({address: addString }, function(result, status){
+	// 		if(status == 'OK'){
+	// 			// Problem here is that function is returning before locations are complete
+	// 			location.lat = result[0].geometry.location.lat() 
+	// 			location.lng = result[0].geometry.location.lng()
+	// 			obj.location = location;
+	// 			// console.log(location)	
+	// 		}
+	// 	});
+
+
+
+
+
+
+
+
 	$('#music-btn').click(function(e){
 		e.preventDefault();
 		var w = window.open("play_tunes.php", 'media', 'height=300,width=350', false);

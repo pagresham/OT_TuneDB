@@ -27,7 +27,9 @@ INSERT INTO MEMBERS
 VALUES ('ansonpierce', 'Pierce', 'Gresham', 
 'piercegresham@yahoo.com', 'pw', 05676);
 
-
+-- This adds two columns to the members table
+-- This is to take the lat and lng of the member after they are created.
+ALTER TABLE `MEMBERS` ADD `LAT` FLOAT NULL AFTER `STATE`, ADD `LNG` FLOAT NULL AFTER `LAT`;
 
 
 
@@ -110,6 +112,24 @@ ON V.SOURCES_ID = S.SOURCES_ID
 WHERE v.tune_name = 'chicken reel'
 AND v.tune_key = 'd'
 AND v.parts = 2
+
+-- To Delete a member, you must first delete their lists, then you CAN delete their 
+-- tunes if you want, and, then you can delete their entry in the MEMBER table
+
+-- First query Given a member id of 30 to delete
+DELETE FROM LISTS WHERE MEMBER_ID = 30;
+
+-- Second query to optionally delete the users tunes
+
+DELETE FROM VERSIONS WHERE MEMBER_ID = 30;
+
+-- Third query to actually delete user from MEMBERS table
+
+DELETE FROM MEMBERS WHERE MEMBER_ID = 30;
+
+-- Optionally to delete a video link given the version ID it is associated with
+
+DELETE FROM LINKS WHERE VERSION ID = '$version_id';
 
 
 
