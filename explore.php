@@ -6,7 +6,6 @@ if (isset($_POST['sort_all'])) {
 	$sortArray = array();
 
 
-	// Add additional server side validation here.
 
 	if(!empty($_POST['title'])) {
 		$sortArray[] = "v.tune_name ='".$_POST['title']."'";
@@ -24,6 +23,8 @@ if (isset($_POST['sort_all'])) {
 		$sortArray[] = "s.description ='".$_POST['source']."'";
 	}
 
+  // Build dynamic sort query //
+  
 	$sortQuery = "SELECT V.TUNE_NAME AS 'Name', V.TUNE_KEY AS 'Key', V.PARTS AS 'Parts', S.DESCRIPTION AS 'Source'
 								FROM VERSIONS V 
 								JOIN SOURCES S 

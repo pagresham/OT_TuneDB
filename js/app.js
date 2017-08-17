@@ -34,25 +34,6 @@ $(function(){
 	$('[data-toggle="tooltip"]').tooltip(); 
 
 
-
-
-	// geocoder.geocode({address: addString }, function(result, status){
-	// 		if(status == 'OK'){
-	// 			// Problem here is that function is returning before locations are complete
-	// 			location.lat = result[0].geometry.location.lat() 
-	// 			location.lng = result[0].geometry.location.lng()
-	// 			obj.location = location;
-	// 			// console.log(location)	
-	// 		}
-	// 	});
-
-
-
-
-
-
-
-
 	$('#music-btn').click(function(e){
 		e.preventDefault();
 		var w = window.open("play_tunes.php", 'media', 'height=300,width=350', false);
@@ -126,11 +107,7 @@ $(function(){
 	// initialize all tooltips //
 	$('[data-toggle="tooltip"]').tooltip();
 
-
-
-
 	// state and city autocomplete text
-
 	
 
 /**

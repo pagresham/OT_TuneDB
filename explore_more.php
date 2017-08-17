@@ -6,7 +6,6 @@ if (isset($_POST['sort_all'])) {
 	$sortArray = array();
 
 
-	// Add additional server side validation here.
 
 	if(!empty($_POST['title'])) {
 		$sortArray[] = "v.tune_name ='".$_POST['title']."'";
@@ -27,8 +26,11 @@ if (isset($_POST['sort_all'])) {
   if(!empty($_POST['members'])) {
     $sortArray[] = "L.MEMBER_ID =".$_POST['members']." ";
   }
+  // needs additional server side validation for above fields //
 
 
+  // Build dynamic sort query based on user input //
+  
 	$sortQuery = "SELECT V.TUNE_NAME AS 'Name', V.TUNE_KEY AS 'Key', V.PARTS AS 'Parts', S.DESCRIPTION AS 'Source'
 								
             FROM LISTS L
@@ -55,6 +57,8 @@ if (isset($_POST['sort_all'])) {
 		die("Connection terminated here:  ".mysqli_connect_error());
 	}
 
+  // Error checking statements //
+  
 	//print_r($sortArray);
 	// print_r($sortQuery);
 
@@ -80,7 +84,8 @@ set_session_vars();
       			</button>
       			<!-- <a class="navbar-brand" >Sort the DB!</a> -->
     		</div>
-    		<form method="post" action="explore_more.php" id="explore">
+    		
+        <form method="post" action="explore_more.php" id="explore">
    			<div class="collapse navbar-collapse" id="sortNavbar">
       			
       		<ul class="nav navbar-nav form-horizontal">

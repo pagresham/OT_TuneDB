@@ -1,5 +1,6 @@
 <?PHP
-// users
+
+// Users I set up in DB
 // phoebebird
 // PhoebeGresham1!
 // Ceasar187

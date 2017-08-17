@@ -62,8 +62,6 @@ $(function() {
 	// }
 
 
-
-
 	// console.log(memberInfo);
 	// 
 	

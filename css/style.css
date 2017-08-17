@@ -1,3 +1,8 @@
+/**
+ * OT_TuneDB app Style Sheet
+ * @author Pierce Gresham
+ * 4/17
+ */
 html, body {
   font-family: sans-serif;
   height: 100%;
@@ -20,6 +25,7 @@ html, body {
   height: 3.5em;
   background: #fff; }
 
+/** rules for modifying the default webkit scrollbar!! */
 ::-webkit-scrollbar {
   width: 6px; }
 
@@ -35,6 +41,7 @@ body {
   background-repeat: repeat-y;
   background-position: center 0%; }
 
+/** Begin Navbar Styles */
 .navbar {
   background-color: white;
   border: none; }
@@ -74,6 +81,7 @@ body {
   background-color: lightgreen;
   padding: 1em 1.5em; }
 
+/** End Navbar Styles */
 .welcome {
   /*width: 80%;*/
   text-align: center;

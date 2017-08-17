@@ -165,7 +165,9 @@ if (isset($_POST['add_tune']) && isset($_SESSION['member_id'])) {
 				}
 				else {
 					$last_version_id = mysqli_insert_id($db);
+					
 					print $last_version_id.": is the last version id entered.";
+					
 					$lists_query = "INSERT INTO LISTS (VERSION_ID, MEMBER_ID, SKILL_LVL) VALUES ($last_version_id, $memberId, '$skill')";
 					print $lists_query;
 					// $lists_query = "INSERT INTO LISTS (VERSION_ID, MEMBER_ID, SKILL_LVL) VALUES (100, 100, 'learning')";
