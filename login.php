@@ -34,7 +34,7 @@ if(isset($_POST['login'])) {
 		}
 		else{
 			$errors['username'] = "Username cannot be blank";
-			print 'strlen is 0';
+			
 		} 
 	}
 	else {

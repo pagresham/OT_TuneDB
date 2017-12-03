@@ -120,7 +120,7 @@ function stateSelect() {
 		for (var i in stateNames){
 			stateNames[i] = stateNames[i].replace(',','');
 		}
-		// var stateSelectBox = $('#stateSelect');
+		
 		$('#stateSelect').autocomplete({
       		source: stateNames
     	});
